@@ -50,69 +50,76 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GridPreview(
-              amount: columns,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(20),
-                      backgroundColor: difficulty == MemoryDifficulty.easy
-                          ? Colors.grey
-                          : null),
-                  onPressed: () => setDifficulty(MemoryDifficulty.easy),
-                  child: const Text('Nybörjare'),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(20),
-                      backgroundColor: difficulty == MemoryDifficulty.medium
-                          ? Colors.grey
-                          : null),
-                  onPressed: () => setDifficulty(MemoryDifficulty.medium),
-                  child: const Text('Medel'),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GridPreview(
+                rows: rows,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(20),
+                        backgroundColor: difficulty == MemoryDifficulty.easy
+                            ? Colors.greenAccent.withOpacity(.75)
+                            : null),
+                    onPressed: () => setDifficulty(MemoryDifficulty.easy),
+                    child: const Text('Nybörjare'),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(20),
+                        backgroundColor: difficulty == MemoryDifficulty.medium
+                            ? Colors.greenAccent.withOpacity(.75)
+                            : null),
+                    onPressed: () => setDifficulty(MemoryDifficulty.medium),
+                    child: const Text('Medel'),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(20),
                       backgroundColor: difficulty == MemoryDifficulty.hard
-                          ? Colors.grey
-                          : null),
-                  onPressed: () => setDifficulty(MemoryDifficulty.hard),
-                  child: const Text('Svår'),
-                ),
-              ],
-            ),
-            const Text('Rounds'),
-            RoundSlider(
-              numRounds: numRounds,
-              onChanged: (rounds) {
-                setState(() {
-                  numRounds = rounds;
-                });
-              },
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => MemoryPage(
-                      rows: rows,
-                      columns: columns,
-                      maxRounds: numRounds,
+                          ? Colors.greenAccent.withOpacity(.75)
+                          : null,
                     ),
+                    onPressed: () => setDifficulty(MemoryDifficulty.hard),
+                    child: const Text('Svår'),
                   ),
-                );
-              },
-              child: const Text('Play new game'),
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 10),
+              const Text('Rounds'),
+              const SizedBox(height: 10),
+              RoundSlider(
+                numRounds: numRounds,
+                onChanged: (rounds) {
+                  setState(() {
+                    numRounds = rounds;
+                  });
+                },
+              ),
+              const SizedBox(height: 10),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => MemoryPage(
+                        rows: rows,
+                        columns: columns,
+                        maxRounds: numRounds,
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('Play new game'),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class MemoryPage extends StatefulWidget {
   const MemoryPage({
@@ -35,6 +36,7 @@ class _MemoryPageState extends State<MemoryPage> {
   @override
   void initState() {
     super.initState();
+
     rows = widget.rows;
     columns = widget.columns;
     maxRounds = widget.maxRounds;
@@ -204,10 +206,11 @@ class _MemoryPageState extends State<MemoryPage> {
                         key: Key(index.toString()),
                         margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
-                          color:
-                              index == animatingCard1 || index == animatingCard2
-                                  ? Colors.greenAccent
-                                  : Colors.white,
+                          color: (index == animatingCard1 ||
+                                      index == animatingCard2) ||
+                                  revealed[index]
+                              ? Colors.greenAccent
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                           boxShadow: const [
                             BoxShadow(

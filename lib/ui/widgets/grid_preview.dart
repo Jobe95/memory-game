@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class GridPreview extends StatelessWidget {
   const GridPreview({
     super.key,
-    required this.amount,
+    required this.rows,
   });
-  final int amount;
+  final int rows;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,9 @@ class GridPreview extends StatelessWidget {
       width: width / 3,
       height: width / 3,
       child: GridView.count(
-        crossAxisCount: amount,
-        children: List.generate(amount * amount, (index) {
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: rows,
+        children: List.generate(rows * rows, (index) {
           return Container(
             margin: const EdgeInsets.all(1.0),
             decoration: BoxDecoration(
